@@ -13,7 +13,7 @@ export const useGetCustomerQuery = () => {
     })
 }
 
-export const createCustomers = ({ setName, setEmail, setCountryCode, setPhone, setAddress }: UseCreateCustomerProps) => {
+export const createCustomers = ({ setName, setEmail, setCountryCode, setPhone, setAddress, onClose }: UseCreateCustomerProps) => {
     return useMutation({
         mutationFn: async (data: CreateCustomerProps) => {
             const res = await axios.post<Response>(API_ROUTES.CUSTOMER.CREATE, data);
@@ -29,6 +29,10 @@ export const createCustomers = ({ setName, setEmail, setCountryCode, setPhone, s
             setCountryCode("");
             setPhone("");
             setAddress("");
+
+            useGetCustomerQuery();
+
+            onClose();
         }
     })
 }

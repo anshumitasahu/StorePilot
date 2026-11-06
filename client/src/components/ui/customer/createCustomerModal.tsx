@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { createCustomers } from "../../../lib/CustomersApi";
+import { X } from "phosphor-react";
 
-export default function CreateCustomerModel() {
+interface CreateCustomerProps {
+    onClose: () => void;
+}
+
+export default function CreateCustomerModel({ onClose }: CreateCustomerProps) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [countryCode, setCountryCode] = useState("+91");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
 
-    const createCustomerMutation = createCustomers({ setName, setEmail, setCountryCode, setPhone, setAddress });
+    const createCustomerMutation = createCustomers({ setName, setEmail, setCountryCode, setPhone, setAddress, onClose });
 
     const handelCreateCustomer = () => {
         createCustomerMutation.mutate({
@@ -22,7 +27,13 @@ export default function CreateCustomerModel() {
 
     return (
         <div>
-            <div className="border border-black/70 p-8 rounded-lg flex flex-col items-center justify-center gap-3 bg-white/80 h-fit min-w-md">
+            <div className="border border-black/70 p-8 rounded-lg flex flex-col items-center justify-center gap-3 bg-white h-fit min-w-md relative">
+                <div
+                    className="absolute top-2 right-2 p-2 bg-red-400 text-white hover:bg-red-500 rounded-full"
+                    onClick={onClose}
+                >
+                    <X weight="bold" />
+                </div>
                 <div className="flex flex-col gap-3 w-full">
                     <div>
                         <div className="text-sm text-neutral-800">

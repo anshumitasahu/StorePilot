@@ -58,4 +58,5 @@ export interface UseCreateCustomerProps {
     setCountryCode: React.Dispatch<React.SetStateAction<string>>;
     setPhone: React.Dispatch<React.SetStateAction<string>>;
     setAddress: React.Dispatch<React.SetStateAction<string>>;
+    onClose: () => void;
 }
