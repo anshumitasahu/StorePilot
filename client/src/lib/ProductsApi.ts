@@ -1,10 +1,9 @@
 import type { CreateProductProps, Response, ProductsQueryResponse, UseCreateProductProps } from "../types/types";
 import axios from "axios";
 import { API_ROUTES } from "./api";
-import { useQuery } from "@tanstack/react-query";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
-export const getProductsQuery = () => {
+export const useGetProductsQuery = () => {
     return useQuery({
         queryKey: ["get-product"],
         queryFn: async () => {
@@ -26,7 +25,7 @@ export const createProducts = ({ setName, setPrice, onClose }: UseCreateProductP
             setName("");
             setPrice("");
 
-            getProductsQuery();
+            useGetProductsQuery();
 
             onClose();
         }

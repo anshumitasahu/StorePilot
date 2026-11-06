@@ -29,10 +29,33 @@ export interface UseCreateProductProps {
 
 
 export interface CreateCustomerProps {
-    id: number,
     name: string,
     email: string,
     countryCode: string,
     phone: string,
     address: string
+}
+
+export interface CustomersQueryResponse extends Response {
+    data: {
+        name: string;
+        phone: string;
+        countryCode: string;
+        email: string;
+        address: string;
+        createdAt: Date;
+        updatedAt: Date;
+        isActive: boolean;
+        createdBy: string;
+        updatedBy: string;
+        id: number;
+    }[]
+}
+
+export interface UseCreateCustomerProps {
+    setName: React.Dispatch<React.SetStateAction<string>>;
+    setEmail: React.Dispatch<React.SetStateAction<string>>;
+    setCountryCode: React.Dispatch<React.SetStateAction<string>>;
+    setPhone: React.Dispatch<React.SetStateAction<string>>;
+    setAddress: React.Dispatch<React.SetStateAction<string>>;
 }

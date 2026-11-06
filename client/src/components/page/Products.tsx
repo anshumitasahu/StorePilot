@@ -1,37 +1,15 @@
-import axios from "axios";
-import { API_ROUTES } from "../../lib/api";
-import { useQuery } from "@tanstack/react-query";
-import type { Response } from "../../types/types";
 import Skeleton from "../ui/utils/Skeleton";
 import CreateProductModel from "../ui/product/CreateProductModel";
 import { Minus, Plus } from "phosphor-react";
 import { useState } from "react";
+import { useGetProductsQuery } from "../../lib/ProductsApi";
 
-
-interface ProductsQueryResponse extends Response {
-	data: {
-		name: string;
-		price: number;
-		createdAt: Date;
-		updatedAt: Date;
-		isActive: boolean;
-		createdBy: string;
-		updatedBy: string;
-		id: number;
-	}[]
-}
 
 
 export default function products() {
 	const [isOpen, setIsOpen] = useState(false)
 
-	const getProductsQuery = useQuery({
-		queryKey: ["get-product"],
-		queryFn: async () => {
-			const res = await axios.get<ProductsQueryResponse>(API_ROUTES.PRODUCT.GET);
-			return res.data;
-		}
-	});
+	const { data, isLoading } = useGetProductsQuery()
 
 	return (
 		<div className="flex justify-center items-center w-screen p-10">
@@ -55,7 +33,7 @@ export default function products() {
 					</button>
 				</div>
 				<div className="h-150 overflow-scroll">
-					{getProductsQuery.isLoading && <Skeleton width="100vw" height="500px" />}
+					{isLoading && <Skeleton width="100vw" height="500px" />}
 					<table className="border border-neutral-600 w-full bg-white/80 rounded-lg border-separate border-spacing-0 overflow-hidden" >
 						<thead>
 							<tr className="border-b">
@@ -68,7 +46,7 @@ export default function products() {
 							</tr>
 						</thead>
 						<tbody>
-							{getProductsQuery.data?.data.map((product) => (
+							{data?.data.map((product) => (
 								<tr key={product.id}>
 									<td className="border-r border-b p-2 border-neutral-600">{product.id}</td>
 									<td className="border-r border-b p-2 border-neutral-600">{product.name}</td>

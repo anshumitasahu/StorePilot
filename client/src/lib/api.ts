@@ -9,6 +9,7 @@ export const API_ROUTES = {
         CREATE: `${BASE_URL}/api/products`
     },
     CUSTOMER: {
-
+        GET: `${BASE_URL}/api/customers`,
+        CREATE: `${BASE_URL}/api/customers`
     }
 }

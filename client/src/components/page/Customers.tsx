@@ -1,44 +1,25 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import CreateCustomerModel from "../ui/customer/createCustomerModal";
+import { useGetCustomerQuery } from "../../lib/CustomersApi";
 
-const API = "http://localhost:3000";
 
-interface Customers {
-    id: number,
-    name: string,
-    email: string,
-    countryCode: string,
-    phone: string,
-    address: string
-}
 
 export default function Customers() {
-    const [customers, setCustomers] = useState<Customers[]>([])
 
-    const getCustomers = async () => {
-        try {
-            const res = await axios.get(
-                `${API}/api/customers`
-            );
+    const { data, isLoading, isError } = useGetCustomerQuery();
 
-            setCustomers(res.data.data)
-        } catch (error) {
-            console.log("getCustomers:", error);
-        }
-    }
-
-    useEffect(() => {
-        getCustomers();
-    }, [])
+    const customers = data?.data ?? [];
 
     return (
         <div className="grid grid-cols-[1fr_2fr] gap-3 justify-center items-center">
+            <CreateCustomerModel />
 
             <div className="h-135">
                 <div className="bg-black text-white rounded-lg p-2">
                     Customers
                 </div>
                 <div className="flex flex-col gap-2 p-3.5 overflow-y-scroll h-110">
+                    {isLoading && <p>Loading customers...</p>}
+                    {isError && <p>Failed to load customers.</p>}
                     {customers.map((customer) => (
                         <div
                             key={customer.id}

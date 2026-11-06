@@ -1,15 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
-import { API_ROUTES } from "../../../lib/api";
-
-interface Customers {
-    id: number,
-    name: string,
-    email: string,
-    countryCode: string,
-    phone: string,
-    address: string
-}
+import { createCustomers } from "../../../lib/CustomersApi";
 
 export default function CreateCustomerModel() {
     const [name, setName] = useState("");
@@ -17,42 +7,17 @@ export default function CreateCustomerModel() {
     const [countryCode, setCountryCode] = useState("+91");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
-    const [customers, setCustomers] = useState<Customers[]>([])
 
+    const createCustomerMutation = createCustomers({ setName, setEmail, setCountryCode, setPhone, setAddress });
 
-    const getCustomers = async () => {
-        try {
-            const res = await axios.get(
-                `${API_ROUTES}/api/customers`
-            );
-
-            setCustomers(res.data.data)
-        } catch (error) {
-            console.log("getCustomers:", error);
-        }
-    }
-
-    const createCustomers = async () => {
-        try {
-            await axios.post(
-                `${API_ROUTES}/api/customers`, {
-                name,
-                email,
-                countryCode,
-                phone,
-                address
-            });
-
-            setName("");
-            setEmail("");
-            setCountryCode("");
-            setPhone("");
-            setAddress("");
-
-            getCustomers();
-        } catch (error) {
-            console.log("createCustomers:", error)
-        }
+    const handelCreateCustomer = () => {
+        createCustomerMutation.mutate({
+            name,
+            email,
+            countryCode,
+            phone,
+            address
+        })
     }
 
     return (
@@ -131,7 +96,7 @@ export default function CreateCustomerModel() {
                 <div>
                     <button
                         className="text-white bg-black w-fit px-2 py-1 rounded-lg hover:cursor-pointer"
-                        onClick={createCustomers}
+                        onClick={handelCreateCustomer}
                     >
                         Add Customers
                     </button>
