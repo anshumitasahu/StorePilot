@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Geist+Pixel&family=IBM+Plex+Mono&family=Pixelify+Sans:wght@400..700&family=Tangerine:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+
+@import "tailwindcss";
+
+@theme {
+  --font-dm: "DM Sans", sans-serif;
+  --font-geist-pixel: "Geist Pixel", sans-serif;
+  --font-ibm: "IBM Plex Mono", monospace;
+  --font-pixelify: "Pixelify Sans", sans-serif;
+  --font-tangerine: "Tangerine", cursive;
+  --font-lobster: "Lobster", sans-serif;
+}

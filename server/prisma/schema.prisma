@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Customer {
+  id          Int    @id @default(autoincrement())
+  name        String
+  phone       String
+  countryCode String
+  email       String @unique
+  address     String
+
+  orders Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isActive  Boolean  @default(true)
+  createdBy String   @default("System")
+  updatedBy String   @default("System")
+}
+
+model Product {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price Int
+
+  orderItems OrderItems[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isActive  Boolean  @default(true)
+  createdBy String   @default("System")
+  updatedBy String   @default("System")
+}
+
+model Order {
+  id         Int @id @default(autoincrement())
+  customerId Int
+
+  customer Customer @relation(fields: [customerId], references: [id])
+
+  orderItems OrderItems[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isActive  Boolean  @default(true)
+  createdBy String   @default("System")
+  updatedBy String   @default("System")
+}
+
+model OrderItems {
+  id        Int @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int @default(1)
+
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isActive  Boolean  @default(true)
+  createdBy String   @default("System")
+  updatedBy String   @default("System")
+}
