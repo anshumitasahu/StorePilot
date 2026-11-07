@@ -12,7 +12,7 @@ export default function products() {
 	const { data, isLoading } = useGetProductsQuery()
 
 	return (
-		<div className="flex justify-center items-center w-screen p-10">
+		<div className="flex justify-center items-center w-full p-10">
 
 			{/* <CreateProductModel /> */}
 

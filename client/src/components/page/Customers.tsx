@@ -2,6 +2,9 @@ import CreateCustomerModel from "../ui/customer/createCustomerModal";
 import { useGetCustomerQuery } from "../../lib/CustomersApi";
 import { useState } from "react";
 import { Minus, Plus } from "phosphor-react";
+import Skeleton from "../ui/utils/Skeleton";
+import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { columns } from "../../lib/tables/customer";
 
 
 
@@ -12,11 +15,16 @@ export default function Customers() {
 
     const customers = data?.data ?? [];
 
+    const table = useReactTable({
+        data: customers,
+        columns: columns,
+        getCoreRowModel: getCoreRowModel()
+    })
+
     return (
-        <div className="flex justify-center items-center w-screen p-10">
+        <div className="flex justify-center items-center w-fit p-10">
 
-
-            <div className="h-135">
+            <div className="h-150 w-full">
                 <div className="flex justify-between bg-black text-white rounded-lg p-2">
                     <div>
                         Customers
@@ -32,8 +40,38 @@ export default function Customers() {
                         }
                     </button>
                 </div>
-                <div className="flex flex-col gap-2 p-3.5 overflow-y-scroll h-110">
-                    {isLoading && <p>Loading customers...</p>}
+
+                {isLoading && <Skeleton width="100%" height="500px" />}
+
+                {isError && <p>Failed to load customers.</p>}
+
+                <table className="w-full">
+                    <thead className="bg-amber-50">
+                        {table.getHeaderGroups().map(group => (
+                            <tr key={group.id}>
+                                {group.headers.map(header => (
+                                    <th key={header.id}>
+                                        {flexRender(header.column.columnDef.header, header.getContext())}
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody>
+                        {table.getRowModel().rows.map(row => (
+                            <tr key={row.id}>
+                                {row.getVisibleCells().map(cell => (
+                                    <td key={cell.id}>
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+                {/* <div className="flex flex-col gap-2 p-3.5 overflow-y-scroll h-150">
+                    {isLoading && <Skeleton width="100%" height="500px" />}
                     {isError && <p>Failed to load customers.</p>}
                     {customers.map((customer) => (
                         <div
@@ -49,7 +87,7 @@ export default function Customers() {
                             Address: {customer.address}
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
 
             {

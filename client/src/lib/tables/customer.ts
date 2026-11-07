@@ -1,7 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { CreateCustomerProps } from "../../types/types";
 
-const columns: ColumnDef<CreateCustomerProps>[] = [
+export const columns: ColumnDef<CreateCustomerProps>[] = [
     {
         accessorKey: "id",
         header: "ID"
@@ -15,11 +15,8 @@ const columns: ColumnDef<CreateCustomerProps>[] = [
         header: "Email"
     },
     {
-        accessorKey: "code",
-        header: "Country Code"
-    },
-    {
-        accessorKey: "phone",
+        id: "phone",
+        accessorFn: (row) => `${row.countryCode}${row.phone}`,
         header: "Phone"
     },
     {
