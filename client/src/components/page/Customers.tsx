@@ -71,25 +71,6 @@ export default function Customers() {
                         </tbody>
                     </table>
                 </div>
-
-                {/* <div className="flex flex-col gap-2 p-3.5 overflow-y-scroll h-150">
-                    {isLoading && <Skeleton width="100%" height="500px" />}
-                    {isError && <p>Failed to load customers.</p>}
-                    {customers.map((customer) => (
-                        <div
-                            key={customer.id}
-                            className="p-2 border-black border rounded-lg bg-white/80"
-                        >
-                            {customer.name}
-                            <br />
-                            E-mail: {customer.email}
-                            <br />
-                            Phone: {customer.countryCode} {customer.phone}
-                            <br />
-                            Address: {customer.address}
-                        </div>
-                    ))}
-                </div> */}
             </div>
 
             {
