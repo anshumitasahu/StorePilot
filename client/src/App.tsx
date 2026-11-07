@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default function App() {
   return (
-    <div className="flex w-screen h-screen bg-[url('/bg-white.jpeg')] bg-cover bg-center bg-no-repeat  overflow-hidden ">
+    <div className="flex w-screen h-screen bg-white overflow-hidden">
       <BrowserRouter>
         <NavBar />
         <div className="flex flex-col items-center justify-center gap-10 w-full overflow-hidden">
@@ -20,3 +20,5 @@ export default function App() {
     </div>
   )
 }
+
+// bg-[url('/pink-bg.png')] bg-cover bg-center bg-no-repeat

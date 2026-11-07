@@ -22,10 +22,10 @@ export default function Customers() {
     })
 
     return (
-        <div className="flex justify-center items-center w-fit p-10">
+        <div className="flex justify-center items-center w-fit p-10 rounded-lg">
 
-            <div className="h-150 w-full">
-                <div className="flex justify-between bg-black text-white rounded-lg p-2">
+            <div className="h-150 w-full bg-white rounded-lg flex flex-col">
+                <div className="flex justify-between shrink-0 p-2">
                     <div>
                         Customers
                     </div>
@@ -45,30 +45,32 @@ export default function Customers() {
 
                 {isError && <p>Failed to load customers.</p>}
 
-                <table className="w-full">
-                    <thead className="bg-amber-50">
-                        {table.getHeaderGroups().map(group => (
-                            <tr key={group.id}>
-                                {group.headers.map(header => (
-                                    <th key={header.id}>
-                                        {flexRender(header.column.columnDef.header, header.getContext())}
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody>
-                        {table.getRowModel().rows.map(row => (
-                            <tr key={row.id}>
-                                {row.getVisibleCells().map(cell => (
-                                    <td key={cell.id}>
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <div className="flex-1 min-h-0 overflow-auto rounded-lg shadow-md">
+                    <table className="w-full border-separate border-spacing-0">
+                        <thead>
+                            {table.getHeaderGroups().map(group => (
+                                <tr key={group.id} className="first:rounded-bl-lg last:rounded-br-lg text-sm text-left">
+                                    {group.headers.map(header => (
+                                        <th key={header.id} className="p-3 bg-gray-100 first:rounded-bl-lg last:rounded-br-lg">
+                                            {flexRender(header.column.columnDef.header, header.getContext())}
+                                        </th>
+                                    ))}
+                                </tr>
+                            ))}
+                        </thead>
+                        <tbody>
+                            {table.getRowModel().rows.map(row => (
+                                <tr key={row.id} className="text-sm">
+                                    {row.getVisibleCells().map(cell => (
+                                        <td key={cell.id} className="p-3 border-b border-gray-200">
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
                 {/* <div className="flex flex-col gap-2 p-3.5 overflow-y-scroll h-150">
                     {isLoading && <Skeleton width="100%" height="500px" />}
