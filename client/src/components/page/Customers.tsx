@@ -35,28 +35,27 @@ export default function Customers() {
     });
 
     return (
-        <div className="flex justify-center items-center w-fit p-10 rounded-lg">
-            <div className="h-160 w-[1131.51px] bg-white rounded-lg flex flex-col">
-                <div className="flex justify-between shrink-0 p-2">
+        <div className="w-full p-8">
+            <h1 className="text-sm pb-8 font-bold">Customers</h1>
+            <div className="w-full">
+                <div className="flex justify-between pb-4 w-full">
                     <div>
                         <input
                             type="text"
                             value={globalFilter}
                             onChange={e => setGlobalFilter(e.target.value)}
                             placeholder="Search Customers"
-                            className="w-full px-2 py-1 text-sm border border-gray-200 rounded-lg text-gray-700 placeholder:text-gray-400 outline-none transition-all duration-200 focus:border-black/40 focus:ring-2 focus:ring-black/5 hover:border-gray-300 text-center"
+                            className="p-2 px-3 text-sm border border-gray-300 rounded-lg"
                         />
                     </div>
-                    <button
-                        className="text-black bg-white p-1 rounded-full"
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {isOpen ? (
-                            <Minus weight="bold" />
-                        ) : (
-                            <Plus weight="bold" />
-                        )}
-                    </button>
+                    <div>
+                        <button
+                            className="text-black bg-pink-400 p-2 px-4 rounded-lg flex text-sm items-center gap-2 text-white font-bold"
+                            onClick={() => setIsOpen(!isOpen)}
+                        >
+                           <Plus /> Add Customer
+                        </button>
+                    </div>
                 </div>
 
                 {isLoading && <Skeleton width="100%" height="500px" />}
@@ -65,7 +64,7 @@ export default function Customers() {
 
                 {!isLoading && !isError && (
                     <>
-                        <div className="flex-1 min-h-0 overflow-auto rounded-lg shadow-md">
+                        <div>
                             <table className="w-full border-separate border-spacing-0">
                                 <thead>
                                     {table.getHeaderGroups().map(group => (
@@ -73,7 +72,7 @@ export default function Customers() {
                                             {group.headers.map(header => (
                                                 <th
                                                     key={header.id}
-                                                    className="p-3 bg-gray-100"
+                                                    className="p-3 bg-pink-100"
                                                 >
                                                     {header.isPlaceholder ? null : (
                                                         <div
@@ -104,7 +103,7 @@ export default function Customers() {
 
                                 <tbody>
                                     {table.getRowModel().rows.map(row => (
-                                        <tr key={row.id} className="text-sm">
+                                        <tr key={row.id} className="text-xs">
                                             {row.getVisibleCells().map(cell => (
                                                 <td
                                                     key={cell.id}
@@ -134,7 +133,7 @@ export default function Customers() {
                         </div>
 
 
-                        <div className="flex items-center justify-between p-3 shrink-0">
+                        <div className="flex items-center justify-between p-3 shrink-0 mt-4">
                             <div className="flex items-center gap-2 text-sm">
                                 <span>Rows per page:</span>
 

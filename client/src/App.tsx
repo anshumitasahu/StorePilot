@@ -9,7 +9,7 @@ export default function App() {
     <div className="flex w-screen h-screen bg-white overflow-hidden">
       <BrowserRouter>
         <NavBar />
-        <div className="flex flex-col items-center justify-center gap-10 w-full overflow-hidden">
+        <div className='w-full'>
           <Routes>
             <Route path="/products" element={<Products />} />
             <Route path="/customers" element={<Customers />} />
