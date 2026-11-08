@@ -3,13 +3,13 @@ import { useGetCustomerQuery } from "../../lib/CustomersApi";
 import { useState } from "react";
 import { Minus, Plus } from "phosphor-react";
 import Skeleton from "../ui/utils/Skeleton";
-import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { flexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable, type SortingState } from "@tanstack/react-table";
 import { columns } from "../../lib/tables/customer";
-
-
 
 export default function Customers() {
     const [isOpen, setIsOpen] = useState(false)
+    const [globalFilter, setGlobalFilter] = useState("");
+    const [sorting, setSorting] = useState<SortingState>([]);
 
     const { data, isLoading, isError } = useGetCustomerQuery();
 
@@ -18,16 +18,29 @@ export default function Customers() {
     const table = useReactTable({
         data: customers,
         columns: columns,
-        getCoreRowModel: getCoreRowModel()
+        state: {
+            globalFilter,
+            sorting
+        },
+        onGlobalFilterChange: setGlobalFilter,
+        onSortingChange: setSorting,
+        getCoreRowModel: getCoreRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getSortedRowModel: getSortedRowModel()
     })
 
     return (
         <div className="flex justify-center items-center w-fit p-10 rounded-lg">
 
-            <div className="h-150 w-full bg-white rounded-lg flex flex-col">
+            <div className="h-160 w-[1131.51px] bg-white rounded-lg flex flex-col">
                 <div className="flex justify-between shrink-0 p-2">
                     <div>
-                        Customers
+                        <input
+                            type="text"
+                            value={globalFilter ?? ''}
+                            onChange={e => setGlobalFilter(e.target.value)}
+                            placeholder="Search Customers"
+                        />
                     </div>
                     <button
                         className="text-black bg-white p-1 rounded-full"
@@ -51,8 +64,22 @@ export default function Customers() {
                             {table.getHeaderGroups().map(group => (
                                 <tr key={group.id} className="first:rounded-bl-lg last:rounded-br-lg text-sm text-left">
                                     {group.headers.map(header => (
-                                        <th key={header.id} className="p-3 bg-gray-100 first:rounded-bl-lg last:rounded-br-lg">
-                                            {flexRender(header.column.columnDef.header, header.getContext())}
+                                        <th
+                                            key={header.id}
+                                            className="p-3 bg-gray-100 first:rounded-bl-lg last:rounded-br-lg"
+                                        >
+                                            {header.isPlaceholder ? null : (
+                                                <div
+                                                    className={`flex items-center gap-2 ${header.column.getCanSort() ? "cursor-pointer select-none" : ""}`}
+                                                    onClick={header.column.getToggleSortingHandler()}
+                                                >
+                                                    {flexRender(header.column.columnDef.header, header.getContext())}
+                                                    {{
+                                                        asc: '↑',
+                                                        desc: '↓',
+                                                    }[header.column.getIsSorted() as string] ?? null}
+                                                </div>
+                                            )}
                                         </th>
                                     ))}
                                 </tr>

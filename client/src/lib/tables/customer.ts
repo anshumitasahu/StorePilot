@@ -4,23 +4,28 @@ import type { CreateCustomerProps } from "../../types/types";
 export const columns: ColumnDef<CreateCustomerProps>[] = [
     {
         accessorKey: "id",
-        header: "ID"
+        header: "ID",
+        enableSorting: true
     },
     {
         accessorKey: "name",
-        header: "Name"
+        header: "Name",
+        enableSorting: true
     },
     {
         accessorKey: "email",
-        header: "Email"
+        header: "Email",
+        enableSorting: true
     },
     {
         id: "phone",
         accessorFn: (row) => `${row.countryCode}${row.phone}`,
-        header: "Phone"
+        header: "Phone",
+        enableSorting: true
     },
     {
         accessorKey: "address",
-        header: "Address"
+        header: "Address",
+        enableSorting: true
     }
 ];
