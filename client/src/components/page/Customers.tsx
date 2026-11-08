@@ -135,14 +135,6 @@ export default function Customers() {
 
 
                         <div className="flex items-center justify-between p-3 shrink-0">
-                            <div className="text-sm text-gray-500">
-                                Showing{" "}
-                                {table.getRowModel().rows.length > 0
-                                    ? pagination.pageIndex * pagination.pageSize + 1
-                                    : 0}
-                                {" "}to{" "} {pagination.pageIndex * pagination.pageSize + table.getRowModel().rows.length} {" "}of{" "} {table.getFilteredRowModel().rows.length} {" "}customers
-                            </div>
-
                             <div className="flex items-center gap-2 text-sm">
                                 <span>Rows per page:</span>
 
@@ -166,7 +158,7 @@ export default function Customers() {
                                 <button
                                     onClick={() => table.setPageIndex(0)}
                                     disabled={!table.getCanPreviousPage()}
-                                    className="px-2 py-1 border rounded-md disabled:opacity-30"
+                                    className="px-2 py-1 border border-neutral-700 text-sm rounded-md disabled:opacity-50"
                                 >
                                     {"<<"}
                                 </button>
@@ -174,21 +166,21 @@ export default function Customers() {
                                 <button
                                     onClick={() => table.previousPage()}
                                     disabled={!table.getCanPreviousPage()}
-                                    className="px-3 py-1 border rounded-md disabled:opacity-30"
+                                    className="px-2.5 py-1 border border-neutral-700 text-sm rounded-md disabled:opacity-50"
                                 >
-                                    Previous
+                                    &lt;
                                 </button>
 
-                                <span className="text-sm text-gray-600">
+                                <span className="text-xs text-gray-600">
                                     Page{" "} {table.getState().pagination.pageIndex + 1} {" "}of{" "} {Math.max(table.getPageCount(), 1)}
                                 </span>
 
                                 <button
                                     onClick={() => table.nextPage()}
                                     disabled={!table.getCanNextPage()}
-                                    className="px-3 py-1 border rounded-md disabled:opacity-30"
+                                    className="px-2.5 py-1 border border-neutral-700 text-sm rounded-md disabled:opacity-50"
                                 >
-                                    Next
+                                    &gt;
                                 </button>
 
                                 <button
@@ -196,7 +188,7 @@ export default function Customers() {
                                         table.setPageIndex(table.getPageCount() - 1)
                                     }
                                     disabled={!table.getCanNextPage()}
-                                    className="px-2 py-1 border rounded-md disabled:opacity-30"
+                                    className="px-2 py-1 border border-neutral-700 text-sm rounded-md disabled:opacity-50"
                                 >
                                     {">>"}
                                 </button>
