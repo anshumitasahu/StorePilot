@@ -21,56 +21,58 @@ export default function CreateProductModel({ onClose }: CreateProductModelProps)
 
         createProductsMutation.mutate({
             name,
-            price: Number(price)
+            price: Number(price),
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            isActive: true
         })
     };
 
     return (
-        <div
-            className="border border-black/50 p-8 rounded-lg flex flex-col items-center justify-center gap-3 bg-white h-fit min-w-md relative"
-        >
-
+        <div className="p-6 rounded-2xl flex flex-col items-center justify-center gap-3 bg-white h-fit min-w-125 relative">
             <div
-                className="absolute top-2 right-2 p-2 bg-red-400 text-white hover:bg-red-500 rounded-full"
+                className="flex justify-between w-full items-center"
                 onClick={onClose}
             >
-                <X weight="bold" />
+                <h1 className="text-sm font-bold">Add Product</h1>
+                <button className="p-1 bg-pink-200 rounded">
+                    <X weight="bold" className="text-pink-500 text-sm" />
+                </button>
             </div>
 
-            <div className="flex flex-col gap-5 w-full">
-                <div className="flex flex-col gap-3">
-                    <div>
-                        <div className="text-sm text-neutral-800">
-                            Product Name
-                        </div>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="name"
-                            className="border border-black/30 outline-0 px-2 py-1 rounded-lg w-full"
-                        />
+            <div className="flex flex-col gap-4 w-full pt-4 border-t border-gray-200">
+
+                <div className="flex flex-col gap-1">
+                    <div className="text-xs text-neutral-700">
+                        Product Name
                     </div>
-                    <div>
-                        <div className="text-sm text-neutral-800">
-                            Product Price
-                        </div>
-                        <input
-                            type="number"
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                            placeholder="Enter Price"
-                            className="border border-black/30 outline-0 px-2 py-1 rounded-lg w-full"
-                        />
-                    </div>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="name"
+                        className="border border-gray-300 outline-0 rounded-lg p-1.5 px-3 w-full text-sm"
+                    />
                 </div>
-                <div className="flex justify-center items-center">
+                <div className="flex flex-col gap-1">
+                    <div className="text-xs text-neutral-700">
+                        Product Price
+                    </div>
+                    <input
+                        type="number"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        placeholder="Enter Price"
+                        className="border border-gray-300 outline-0 rounded-lg p-1.5 px-3 w-full text-sm"
+                    />
+                </div>
+
+                <div className="mt-4 w-full flex justify-end">
                     <button
-                        className="text-white bg-black w-fit px-2 py-1 rounded-lg hover:cursor-pointer"
+                        className="text-white bg-pink-500 w-fit px-4 py-2 rounded-xl hover:cursor-pointer text-xs font-bold"
                         onClick={handelCreateProduct}
-                        disabled={createProductsMutation.isPending}
                     >
-                        {createProductsMutation.isPending ? "creating..." : "Add Products"}
+                        Create
                     </button>
                 </div>
             </div>

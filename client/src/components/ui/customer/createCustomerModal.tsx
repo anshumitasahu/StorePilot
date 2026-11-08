@@ -27,7 +27,7 @@ export default function CreateCustomerModel({ onClose }: CreateCustomerProps) {
 
     return (
         <div>
-            <div className="p-6 rounded-2xl flex flex-col items-center justify-center gap-3 bg-white h-fit min-w-[500px] relative">
+            <div className="p-6 rounded-2xl flex flex-col items-center justify-center gap-3 bg-white h-fit min-w-125 relative">
                 <div
                     className="flex justify-between w-full items-center"
                     onClick={onClose}

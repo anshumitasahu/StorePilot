@@ -5,7 +5,10 @@ export interface Response {
 
 export interface CreateProductProps {
     name: string,
-    price: number
+    price: number,
+    createdAt: Date;
+    updatedAt: Date;
+    isActive: boolean;
 }
 
 export interface ProductsQueryResponse extends Response {

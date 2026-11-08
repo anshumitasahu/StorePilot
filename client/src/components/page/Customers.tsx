@@ -1,7 +1,7 @@
 import CreateCustomerModel from "../ui/customer/createCustomerModal";
 import { useGetCustomerQuery } from "../../lib/CustomersApi";
 import { useState } from "react";
-import { Minus, Plus } from "phosphor-react";
+import { Plus } from "phosphor-react";
 import Skeleton from "../ui/utils/Skeleton";
 import { flexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getPaginationRowModel, useReactTable, type SortingState, } from "@tanstack/react-table";
 import { columns } from "../../lib/tables/customer";
@@ -50,10 +50,10 @@ export default function Customers() {
                     </div>
                     <div>
                         <button
-                            className="text-black bg-pink-400 p-2 px-4 rounded-lg flex text-sm items-center gap-2 text-white font-bold"
+                            className="bg-pink-400 p-2 px-4 rounded-lg flex text-sm items-center gap-2 text-white font-bold hover:cursor-pointer"
                             onClick={() => setIsOpen(!isOpen)}
                         >
-                           <Plus /> Add Customer
+                            <Plus /> Add Customer
                         </button>
                     </div>
                 </div>
@@ -68,7 +68,10 @@ export default function Customers() {
                             <table className="w-full border-separate border-spacing-0">
                                 <thead>
                                     {table.getHeaderGroups().map(group => (
-                                        <tr key={group.id} className="text-sm text-left">
+                                        <tr
+                                            key={group.id}
+                                            className="text-sm text-left"
+                                        >
                                             {group.headers.map(header => (
                                                 <th
                                                     key={header.id}
