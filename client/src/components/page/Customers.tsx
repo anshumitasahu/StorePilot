@@ -199,7 +199,7 @@ export default function Customers() {
             </div>
 
             {isOpen && (
-                <div className="flex bg-black/20 absolute z-50 inset-0 justify-center items-center">
+                <div className="flex bg-black/20 backdrop-blur-xs absolute z-50 inset-0 justify-center items-center">
                     <CreateCustomerModel
                         onClose={() => setIsOpen(false)}
                     />
