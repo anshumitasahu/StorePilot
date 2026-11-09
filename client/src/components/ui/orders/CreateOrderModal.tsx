@@ -25,7 +25,7 @@ export default function CreateOrdersModal() {
     const handleCreateOrder = () => {
         createOrdersMutation.mutate({
             customerId: Number(customerId),
-            orderItems: addedItems.map((item) => ({
+            items: addedItems.map((item) => ({
                 productId: item.product,
                 quantity: item.quantity
             }))

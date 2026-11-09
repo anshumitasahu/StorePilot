@@ -6,8 +6,6 @@ import { useGetProductsQuery } from "../../lib/ProductsApi";
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable, type SortingState } from "@tanstack/react-table";
 import { columns } from "../../lib/tables/products"
 
-
-
 export default function products() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [globalFilter, setGlobalFilter] = useState("");

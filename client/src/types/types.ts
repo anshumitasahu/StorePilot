@@ -67,7 +67,7 @@ export interface UseCreateCustomerProps {
 
 export interface CreateOrdersProps {
     customerId: number;
-    orderItems: {
+    items: {
         productId: number;
         quantity: number;
     }[];
