@@ -11,7 +11,7 @@ export default function NavBar() {
                             S
                         </div>
                         <div className="text-sm text-pink-500 font-bold">
-                            Store My Ass
+                            ShopPilot
                         </div>
                     </div>
 
