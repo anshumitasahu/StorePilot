@@ -3,8 +3,14 @@ import type { OrderResponse } from "../../types/types";
 
 export const columns: ColumnDef<OrderResponse>[] = [
     {
-        accessorKey: "id",
+        id: "serialNumber",
         header: "ID",
+        enableSorting: false,
+        cell: ({ row, table }) =>
+            table.getState().pagination.pageIndex *
+            table.getState().pagination.pageSize +
+            row.index +
+            1,
     },
     {
         accessorKey: "customer.name",
@@ -18,6 +24,18 @@ export const columns: ColumnDef<OrderResponse>[] = [
             row.original.orderItems
                 .map((item) => item.product.name)
                 .join(", "),
+    },
+    {
+        id: "totalAmount",
+        header: "Total Amount",
+        accessorFn: (row) =>
+            row.orderItems.reduce(
+                (total, item) =>
+                    total + item.quantity * item.product.price,
+                0
+            ),
+        cell: ({ getValue }) =>
+            `₹${(getValue<number>()).toLocaleString("en-IN")}`,
     },
     {
         accessorKey: "createdAt",
