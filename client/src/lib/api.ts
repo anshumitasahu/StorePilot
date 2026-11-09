@@ -2,7 +2,8 @@ const BASE_URL = "http://localhost:3000";
 
 export const API_ROUTES = {
     ORDER: {
-
+        GET: `${BASE_URL}/api/orders`,
+        CREATE: `${BASE_URL}/api/orders`
     },
     PRODUCT: {
         GET: `${BASE_URL}/api/products`,

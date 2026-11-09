@@ -20,8 +20,13 @@ export interface CreateProductProps {
     isActive: boolean;
 }
 
-export interface ProductsQueryResponse extends Response, BaseEntity {
-    data: CreateProductProps[]
+export interface Product extends BaseEntity {
+    name: string;
+    price: number;
+}
+
+export interface ProductsQueryResponse extends Response {
+    data: Product[];
 }
 
 export interface UseCreateProductProps {
@@ -39,8 +44,16 @@ export interface CreateCustomerProps {
     address: string
 }
 
-export interface CustomersQueryResponse extends Response, BaseEntity {
-    data: CreateCustomerProps[]
+export interface Customer extends BaseEntity {
+    name: string;
+    email: string;
+    countryCode: string;
+    phone: string;
+    address: string;
+}
+
+export interface CustomersQueryResponse extends Response {
+    data: Customer[];
 }
 
 export interface UseCreateCustomerProps {
@@ -76,4 +89,16 @@ export interface OrderResponse extends BaseEntity {
 
 export interface OrdersQueryResponse extends Response {
     data: OrderResponse[];
+}
+
+interface AddedItem {
+    product: number;
+    quantity: number;
+}
+
+export interface UseCreateOrderProps {
+    setProductId: React.Dispatch<React.SetStateAction<string>>;
+    setCustomerId: React.Dispatch<React.SetStateAction<string>>;
+    setQuantity: React.Dispatch<React.SetStateAction<string>>;
+    setAddedItems: React.Dispatch<React.SetStateAction<AddedItem[]>>;
 }
