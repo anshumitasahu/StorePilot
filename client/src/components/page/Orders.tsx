@@ -60,7 +60,7 @@ export default function Orders() {
                             className="bg-pink-400 p-2 px-4 rounded-lg flex text-sm items-center gap-2 text-white font-bold hover:cursor-pointer"
                             onClick={() => setIsOpen(!isOpen)}
                         >
-                            <Plus /> Add Customer
+                            <Plus /> Add Order
                         </button>
                     </div>
                 </div>
@@ -119,7 +119,7 @@ export default function Orders() {
                                                 colSpan={columns.length}
                                                 className="p-5text-center text-gray-500"
                                             >
-                                                No customers found.
+                                                No orders found.
                                             </td>
                                         </tr>
                                     )}
@@ -189,45 +189,6 @@ export default function Orders() {
                 )}
             </div>
 
-            {/* <div className="flex flex-col gap-2 p-3 h-150">
-                <div className="bg-black text-white px-2 py-1 rounded-lg w-full">
-                    Recent Orders:
-                </div>
-                <div className="flex flex-col gap-2 p-3 overflow-y-scroll h-128">
-                    {orders.map((order) => (
-                        <div
-                            key={order.id}
-                            className="border border-black p-3 flex gap-10 rounded-md items-center justify-between bg-white/80"
-                        >
-                            <div className="w-full flex items-center gap-3">
-                                <div className="bg-black text-white p-2 rounded-lg">
-                                    <User weight="bold" />
-                                </div>
-                                <div className="w-full">
-                                    <span className="text-sm text-neutral-600">Customer</span> <br /> <span className="font-semibold">{order.customer.name}</span>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col gap-2 max-h-20 overflow-scroll border-r border-l border-r-neutral-500 border-l-neutral-500  w-full items-center">
-                                {order.orderItems.map((orderItem) => (
-                                    <div
-                                        key={orderItem.id}
-                                        className="border border-black/20 px-2 py-1 rounded-md w-fit text-center"
-                                    >
-                                        {orderItem.product.name}({orderItem.quantity}): ₹{orderItem.product.price}
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="w-full text-center ">
-                                <span className="bg-neutral-100 p-2 rounded-lg font-semibold">
-                                    Total: ₹{order.orderItems.reduce((total, item) => total + (item.quantity * item.product.price), 0)}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div> */}
             {isOpen && (
                 <div className="flex bg-black/20 backdrop-blur-xs absolute z-50 inset-0 justify-center items-center">
                     <CreateOrdersModal
