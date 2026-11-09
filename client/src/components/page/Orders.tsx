@@ -1,4 +1,4 @@
-import { Plus, User } from "phosphor-react";
+import { Plus } from "phosphor-react";
 import CreateOrdersModal from "../ui/orders/CreateOrderModal";
 import { useGetOrderQuery } from "../../lib/OrderApi";
 import { useState } from "react";
