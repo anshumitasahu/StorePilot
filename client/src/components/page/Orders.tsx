@@ -1,44 +1,32 @@
-import { User } from "phosphor-react";
-import { useState } from "react";
+import { Plus, User } from "phosphor-react";
 import CreateOrdersModal from "../ui/orders/CreateOrderModal";
 import { useGetOrderQuery } from "../../lib/OrderApi";
-
-
-interface Products {
-    id: number,
-    name: string,
-    price: number
-}
-
-interface Customers {
-    id: number,
-    name: string,
-    email: string,
-    countryCode: string,
-    phone: string,
-    address: string
-}
-
-interface Orders {
-    id: number,
-    customer: Customers,
-    orderItems: {
-        id: number,
-        quantity: number,
-        product: Products
-    }[]
-}
+import { useState } from "react";
+import Skeleton from "../ui/utils/Skeleton";
 
 export default function Orders() {
+    const [isOpen, setIsOpen] = useState(false);
     const { data, isLoading, isError } = useGetOrderQuery()
     const orders = data?.data ?? [];
 
-
-    // const findCustomer = customers.find(customer => customer.id === Number(customerId))
-
     return (
-        <div className="grid grid-cols-[1fr_2fr] gap-3 border border-black/80 rounded-lg w-screen justify-center items-center h-screen overfloew-hidden px-5">
-            <CreateOrdersModal />
+        <div className="w-full p-8">
+            <h1 className="text-sm pb-8 font-bold">Orders</h1>
+            <div className="flex justify-between pb-4 w-full">
+                <div>order</div>
+                <div>
+                    <button
+                        className="bg-pink-400 p-2 px-4 rounded-lg flex text-sm items-center gap-2 text-white font-bold hover:cursor-pointer"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        <Plus /> Add Customer
+                    </button>
+                </div>
+            </div>
+
+            {isLoading && <Skeleton width="100vw" height="500px" />}
+
+            {isError && <p>Failed to load products</p>}
 
             <div className="flex flex-col gap-2 p-3 h-150">
                 <div className="bg-black text-white px-2 py-1 rounded-lg w-full">
@@ -79,6 +67,12 @@ export default function Orders() {
                     ))}
                 </div>
             </div>
+            {isOpen && (
+                <div className="flex bg-black/20 backdrop-blur-xs absolute z-50 inset-0 justify-center items-center">
+                    <CreateOrdersModal
+                    />
+                </div>
+            )}
         </div >
     )
 }
